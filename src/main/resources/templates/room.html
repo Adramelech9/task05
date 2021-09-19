@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Room</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="collapse" id="collapseExample">
+    <div class="card card-body alert-info mt-2">
+        <div style="white-space:pre-wrap" th:text=" ${table}" />
+    </div>
+</div>
+<p>
+    <button class="btn btn-primary m-lg-5" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        rules of the game
+    </button>
+</p>
+<br>
+<div>
+    <p th:text="${playerNum} + ' is you'"></p>
+    <div class="container-fluid" id="buttons">
+        <button onClick="f(1)" id="1">текст</button>
+        <button onClick="f(2)" id="2">текст</button>
+        <button onClick="f(3)" id="3">текст</button>
+        <button onClick="f(4)" id="4">текст</button>
+        <button onClick="f(5)" id="5">текст</button>
+        <button onClick="f(6)" id="6">текст</button>
+        <button onClick="f(7)" id="7">текст</button>
+        <button onClick="f(0)" id="0" th:text="finish"></button>
+    </div>
+</div>
+<script>
+    var i, k = 1, txt = "[[${moves}]]";
+    var split = txt.split(" ");
+    for (i = 1; i <= split.length; i++) {
+        document.getElementById(i).innerText = split[i - 1];
+        k++;
+    }
+    for (i = k; i <= 7; i++) document.getElementById(i).remove();
+
+    var countUser1 = 0, countUser2 = 0, draws = 0, numMove = 0, am, bm, isPlayer = "[[${playerNum}]]";
+
+    function f(num) {
+        var a = 10, b = 10, text;
+        if (isPlayer == "Player1" && a == 10) a = num;
+        else if (isPlayer == "Player2" && b == 10) b = num;
+        if (a == 0 || b == 0) {
+            if (a == 0) text = "User1";
+            else text = "User2";
+            alert(text + " chose \"finish\"\n score:\n User1: " + countUser1 + " win\n User2: " + countUser2 + " win\n" + draws + "draws");
+        }
+        if (a < 8 && b < 8) {
+            if (a == b) {
+                draws++;
+                text = "draw.";
+            }
+            if (a - b > (split.length - 1) / 2 || b - a > (split.length - 1) / 2) {
+                am = -a;
+                bm = -b;
+            } else {
+                am = a;
+                bm = b;
+            }
+            if (a < b) {
+                countUser1++;
+                text = "User1 win!";
+            } else {
+                countUser2++;
+                text = "User2 win!";
+            }
+            numMove++;
+            alert("Round " + numMove + "\n" + text + "\n User 1 selected: " + a + "\n User 2 selected: " + b);
+        }
+    }
+</script>
+</body>
+</html>

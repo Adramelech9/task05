@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create room</title>
+</head>
+<body>
+<div th:insert="header :: header"></div>
+<div class="alert alert-warning m-lg-5" role="alert">
+    Fill in the names of the moves with a space or choose the default option.
+    The number of unique moves must be 3, 5 or 7
+</div>
+<form method="get" class="m-lg-5">
+    <input type="text" id="setOfMoves" name="setOfMoves" value="" placeholder="Fill out the form. Example: stone scissors paper" class="form-control">
+    <button onClick="f(3)" class="btn btn-warning">default for 3 moves</button>
+    <button onClick="f(5)" class="btn btn-warning">default for 5 moves</button>
+    <br><br>
+    <input type="hidden" id="3" value="stone paper scissors">
+    <input type="hidden" id="5" value="stone spock paper lizard scissors">
+    <button type="submit" class="btn btn-success">start</button>
+    <a href="/" class="btn btn-secondary">cancel</a>
+
+</form>
+<script type="text/javascript">
+    function f(num) {
+        var txt = document.getElementById(num).value;
+        document.getElementById("setOfMoves").value = txt;
+    }
+</script>
+</body>
+</html>
