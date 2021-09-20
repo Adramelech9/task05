@@ -75,7 +75,7 @@ public class MainController {
     }
 
     @GetMapping("/room/{id}/delete")
-    public String del(@PathVariable(value = "id") long id, Model model) {
+    public String del(@PathVariable(value = "id") long id) {
         String username = GameApplication.userName.substring(6, GameApplication.userName.length()-1);
         Rooms rooms = roomRepository.findById(id).orElseThrow();
         if (rooms.getAuthor().equals(username)) roomRepository.delete(rooms);
