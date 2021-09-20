@@ -1,3 +1,4 @@
+/*
 package com.itransition.training.task05.Users.alfa;
 
 import javax.crypto.Mac;
@@ -59,3 +60,4 @@ public class RandomKey {
         return 1;
     }
 }
+*/

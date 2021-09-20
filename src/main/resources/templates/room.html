@@ -42,11 +42,10 @@
     for (i = k; i <= 7; i++) document.getElementById(i).remove();
 
     var countUser1 = 0, countUser2 = 0, draws = 0, numMove = 0, am, bm, isPlayer = "[[${playerNum}]]";
-
+    var a = 9, b = 9, text;
     function f(num) {
-        var a = 10, b = 10, text;
-        if (isPlayer == "Player1" && a == 10) a = num;
-        else if (isPlayer == "Player2" && b == 10) b = num;
+        if (isPlayer == "Player1" && a == 9) a = num;
+        else if (isPlayer == "Player2" && b == 9) b = num;
         if (a == 0 || b == 0) {
             if (a == 0) text = "User1";
             else text = "User2";
@@ -73,6 +72,7 @@
             }
             numMove++;
             alert("Round " + numMove + "\n" + text + "\n User 1 selected: " + a + "\n User 2 selected: " + b);
+            a = 9; b = 9;
         }
     }
 </script>

@@ -74,10 +74,11 @@ public class MainController {
         return "redirect:/room/{id}";
     }
 
-//    @MessageMapping("/hello")
-//    @SendTo("/topic/greetings")
-//    public Greeting greeting(Rooms rooms) throws Exception {
-//        Thread.sleep(1000); // simulated delay
-//        return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
-//    }
+    @GetMapping("/room/{id}/delete")
+    public String del(@PathVariable(value = "id") long id, Model model) {
+        String username = GameApplication.userName.substring(6, GameApplication.userName.length()-1);
+        Rooms rooms = roomRepository.findById(id).orElseThrow();
+        if (rooms.getAuthor().equals(username)) roomRepository.delete(rooms);
+        return "redirect:/";
+    }
 }
